@@ -2,24 +2,25 @@ import { useAuth } from "@/contexts/AuthContext";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 function NavBar() {
   const { loggedInUser, logout } = useAuth();
   return (
-    <nav className="bg-slate-600 flex justify-between p-6 pl-32 items-center ">
-      <h1 className="text-3xl font-bold">
+    <nav className="bg-primary flex justify-between p-6 px-20 items-center ">
+      <h1 className="text-3xl font-bold text-background">
         <Link to="/">Tasking</Link>
       </h1>
       <ul className="flex gap-6 items-center">
-        <li>
+        <li className="text-xl text-muted font-bold">
           <Link to="/about">About</Link>
         </li>
         {loggedInUser === null ? (
           <>
-            <li>
+            <li className="text-xl text-muted font-bold">
               <Link to="/auth/login">Login</Link>
             </li>
-            <li>
+            <li className="text-xl text-muted font-bold">
               <Link to="/auth/register">Register</Link>
             </li>
           </>
@@ -27,12 +28,16 @@ function NavBar() {
 
         {loggedInUser ? (
           <>
-            <li>
+            <li className="text-xl text-muted font-bold">
               <Link to="/tasks">Tasks</Link>
             </li>
-            <li onClick={logout} className="cursor-pointer">
+            <Button
+              onClick={logout}
+              className="text-xl text-muted font-bold "
+              variant="destructive"
+            >
               Logout
-            </li>
+            </Button>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback className="text-gray-950">

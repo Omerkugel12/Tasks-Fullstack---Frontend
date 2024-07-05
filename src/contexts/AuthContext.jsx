@@ -3,6 +3,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from "./ModalContext";
+import { Toaster } from "@/components/ui/toaster";
 
 const AuthContext = createContext();
 
@@ -39,9 +40,9 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, [token]);
 
-  useEffect(() => {
-    if (loggedInUser) navigate("/", { replace: true });
-  }, [loggedInUser]);
+  // useEffect(() => {
+  //   if (loggedInUser) navigate("/", { replace: true });
+  // }, [loggedInUser]);
 
   function logout() {
     setToken(null);
@@ -53,12 +54,19 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post("/auth/login", userData);
       setToken(response.data.token);
-      setModal("loggedInModal");
+      setTimeout(() => {
+        setModal("loggedInModal");
+      }, 500);
       setTimeout(() => {
         setModal(null);
-      }, 5000);
+      }, 5500);
+      navigate("/tasks");
     } catch (error) {
       console.error("Error logging in:", error);
+      setModal("loginFailure");
+      setTimeout(() => {
+        setModal(null);
+      }, 5500);
     }
   }
 

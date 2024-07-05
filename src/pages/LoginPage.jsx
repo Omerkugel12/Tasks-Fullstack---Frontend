@@ -17,7 +17,6 @@ import { useModalContext } from "@/contexts/ModalContext";
 function LoginPage() {
   const { login } = useAuth();
   const { modal, setModal } = useModalContext();
-  console.log(modal);
 
   function handleLoginSubmit(ev) {
     ev.preventDefault();

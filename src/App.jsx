@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import NavBar from "./components/react-omponenets/NavBar";
 import { useModalContext } from "./contexts/ModalContext";
+import Modal from "./components/ui/Modal";
 
 function App() {
   const { loggedInUser } = useAuth();
+  // console.log(loggedInUser);
   const { modal } = useModalContext();
-  console.log(modal);
+  // console.log(modal);
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
     if (loggedInUser === null) {
@@ -34,35 +36,44 @@ function App() {
   }
   return (
     <>
-      <NavBar />
-      {modal === "loggedInModal" ? <div>hiii</div> : null}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route
-          path="/tasks"
-          element={
-            <ProtectedLoggedInRoute>
-              <TasksLayout />
-            </ProtectedLoggedInRoute>
-          }
-        >
-          <Route index element={<TasksPage />} />
-          <Route path=":taskId" element={<TaskDeatailsPage />} />
-        </Route>
+      <div>
+        {loggedInUser && modal === "loggedInModal" ? (
+          <Modal success>Good morning: {loggedInUser.firstName}</Modal>
+        ) : null}
+        {modal === "loginFailure" ? (
+          <Modal failure>Error logging in</Modal>
+        ) : null}
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route
+            path="/tasks"
+            element={
+              <ProtectedLoggedInRoute>
+                <TasksLayout />
+              </ProtectedLoggedInRoute>
+            }
+          >
+            <Route index element={<TasksPage />} />
+            <Route path=":taskId" element={<TasksPage />}>
+              <Route index element={<TaskDeatailsPage />} />
+            </Route>
+          </Route>
 
-        <Route
-          path="/auth"
-          element={
-            <ProtectedLoggedOutRoute>
-              <AuthLayout />
-            </ProtectedLoggedOutRoute>
-          }
-        >
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-        </Route>
-      </Routes>
+          <Route
+            path="/auth"
+            element={
+              <ProtectedLoggedOutRoute>
+                <AuthLayout />
+              </ProtectedLoggedOutRoute>
+            }
+          >
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </div>
     </>
   );
 }
