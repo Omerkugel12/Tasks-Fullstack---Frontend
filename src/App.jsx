@@ -10,9 +10,12 @@ import { useAuth } from "./contexts/AuthContext";
 import { Link } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import NavBar from "./components/react-omponenets/NavBar";
+import { useModalContext } from "./contexts/ModalContext";
 
 function App() {
   const { loggedInUser } = useAuth();
+  const { modal } = useModalContext();
+  console.log(modal);
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
     if (loggedInUser === null) {
@@ -32,6 +35,7 @@ function App() {
   return (
     <>
       <NavBar />
+      {modal === "loggedInModal" ? <div>hiii</div> : null}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />

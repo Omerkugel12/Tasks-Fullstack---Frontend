@@ -12,9 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useModalContext } from "@/contexts/ModalContext";
 
 function LoginPage() {
   const { login } = useAuth();
+  const { modal, setModal } = useModalContext();
+  console.log(modal);
 
   function handleLoginSubmit(ev) {
     ev.preventDefault();
