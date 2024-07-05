@@ -15,9 +15,9 @@ function TaskItem({ task }) {
           <Badge className="bg-background text-primary">Pinned</Badge>
         ) : null}
       </div>
-      <Button>
-        <Link to={`/tasks/${task._id}`}>More info</Link>
-      </Button>
+      <Link to={`/tasks/${task._id}`}>
+        <Button>More info</Button>
+      </Link>
     </li>
   );
 }

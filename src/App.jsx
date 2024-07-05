@@ -12,12 +12,11 @@ import AboutPage from "./pages/AboutPage";
 import NavBar from "./components/react-omponenets/NavBar";
 import { useModalContext } from "./contexts/ModalContext";
 import Modal from "./components/ui/Modal";
+import CreateTaskPage from "./pages/CreateTaskPage";
 
 function App() {
   const { loggedInUser } = useAuth();
-  // console.log(loggedInUser);
   const { modal } = useModalContext();
-  // console.log(modal);
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
     if (loggedInUser === null) {
@@ -43,6 +42,12 @@ function App() {
         {modal === "loginFailure" ? (
           <Modal failure>Error logging in</Modal>
         ) : null}
+        {modal === "successDelete" ? (
+          <Modal success>Task deleted successfully!</Modal>
+        ) : null}
+        {modal === "failureDelete" ? (
+          <Modal failure>Error to delete task</Modal>
+        ) : null}
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -58,6 +63,9 @@ function App() {
             <Route index element={<TasksPage />} />
             <Route path=":taskId" element={<TasksPage />}>
               <Route index element={<TaskDeatailsPage />} />
+            </Route>
+            <Route path="create" element={<TasksPage />}>
+              <Route index element={<CreateTaskPage />} />{" "}
             </Route>
           </Route>
 
