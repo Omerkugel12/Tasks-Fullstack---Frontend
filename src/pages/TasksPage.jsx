@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 function TasksPage() {
   const { loggedInUser } = useAuth();
   const { loggedInUserTasks, setLoggedInUserTasks } = useLoggedInUserTasks();
-  // const [loggedInUserTasks, setLoggedInUserTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +35,11 @@ function TasksPage() {
         {loggedInUser && `${loggedInUser.firstName}'s Tasks`}
       </h1>
       <div className="flex justify-center items-center ">
-        <TasksList loggedInUserTasks={loggedInUserTasks} />
+        {loggedInUserTasks.length > 0 ? (
+          <TasksList loggedInUserTasks={loggedInUserTasks} />
+        ) : (
+          <p>No Tasks yet...</p>
+        )}
       </div>
       <Outlet />
     </div>

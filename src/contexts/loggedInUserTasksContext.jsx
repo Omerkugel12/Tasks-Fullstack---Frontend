@@ -4,6 +4,7 @@ const loggedInUserTasksContext = createContext(null);
 
 export function LoggedInUserTasksProvider({ children }) {
   const [loggedInUserTasks, setLoggedInUserTasks] = useState([]);
+  const [task, setTask] = useState(null);
 
   return (
     <loggedInUserTasksContext.Provider
