@@ -1,9 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import { useModalContext } from "@/contexts/ModalContext";
 import { useLoggedInUserTasks } from "@/contexts/loggedInUserTasksContext";
 import api from "@/services/api.service";
-import { Pencil, Trash2, X } from "lucide-react";
+import { Pencil, Pin, PinOff, Trash2, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -53,6 +54,43 @@ function TaskDeatailsPage() {
     }
   }
 
+  async function handlePinnedChange(e, taskId) {
+    try {
+      const res = await api.patch(`/task/${taskId}`, {
+        isPinned: !task.isPinned,
+      });
+      const updatedTask = res.data;
+      setLoggedInUserTasks((prevTasks) => {
+        return prevTasks.map((task) =>
+          task._id === taskId ? updatedTask : task
+        );
+      });
+      setTask(updatedTask);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleTodoChecked(e, todoId, taskId) {
+    try {
+      const updatedTodoList = task.todoList.map((todo) =>
+        todo._id === todoId ? { ...todo, isComplete: !todo.isComplete } : todo
+      );
+
+      const res = await api.patch(`/task/${taskId}`, {
+        todoList: updatedTodoList,
+      });
+
+      const updatedTask = res.data;
+      setLoggedInUserTasks((prevTasks) =>
+        prevTasks.map((task) => (task._id === taskId ? updatedTask : task))
+      );
+      setTask(updatedTask);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="fixed top-0 bottom-0 right-0 left-0 bg-slate-700 opacity-80"></div>
@@ -68,7 +106,11 @@ function TaskDeatailsPage() {
             {task.todoList.map((todo) => {
               return (
                 <li key={todo._id}>
-                  {/* <input type="checkbox" checked={todo.isComplete} /> */}
+                  <input
+                    type="checkbox"
+                    checked={todo.isComplete}
+                    onChange={(e) => handleTodoChecked(e, todo._id, task._id)}
+                  />
                   <label className={todo.isComplete ? "line-through" : null}>
                     {todo.title}
                   </label>
@@ -79,11 +121,7 @@ function TaskDeatailsPage() {
         ) : (
           <p>No todos yet...</p>
         )}
-        <div>
-          {/* <input type="checkbox" checked={task.isPinned} /> */}
-          {task.isPinned ? <Badge className="">Pinned</Badge> : null}
-        </div>
-        <div className="flex gap-4 absolute bottom-4 right-4">
+        <div className="flex gap-4 absolute top-4 right-4">
           <Button
             onClick={handleDelete}
             variant="outlet"
@@ -97,6 +135,30 @@ function TaskDeatailsPage() {
           >
             <Pencil className="text-primary" />
           </Button>
+          <div>
+            <input
+              id="pinned"
+              className="hidden"
+              type="checkbox"
+              checked={task.isPinned}
+              onChange={(e) => {
+                handlePinnedChange(e, task._id);
+              }}
+            />
+            {task.isPinned ? (
+              <label htmlFor="pinned">
+                <div>
+                  <PinOff className="text-primary size-10 border border-primary rounded-sm px-1 py-1.5 hover:bg-primary/90 cursor-pointer" />
+                </div>
+              </label>
+            ) : (
+              <label htmlFor="pinned">
+                <div className={""}>
+                  <Pin className="text-primary size-10 border border-primary rounded-md px-1 py-1.5 hover:bg-primary/90 cursor-pointer" />
+                </div>
+              </label>
+            )}
+          </div>
         </div>
       </div>
     </>
