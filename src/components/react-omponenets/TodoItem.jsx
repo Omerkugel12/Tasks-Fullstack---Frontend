@@ -23,7 +23,9 @@ function TodoItem({
               checked={todo.isComplete}
               onChange={() => handleTodoChecked(todo._id)}
             />
-            <label className={todo.isComplete ? "line-through" : null}>
+            <label
+              className={todo.isComplete ? "line-through text-slate-500" : null}
+            >
               {todo.title}
             </label>
           </div>
