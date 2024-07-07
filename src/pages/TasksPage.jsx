@@ -4,7 +4,7 @@ import { useLoggedInUserTasks } from "@/contexts/loggedInUserTasksContext";
 import api from "@/services/api.service";
 import { Grid3X3, LayoutGrid } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router";
+import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 
 import TasksTable from "@/components/react-omponenets/TasksTable";
@@ -13,7 +13,7 @@ import TasksCards from "@/components/react-omponenets/TasksCards";
 function TasksPage() {
   const { loggedInUser } = useAuth();
   const { loggedInUserTasks, setLoggedInUserTasks } = useLoggedInUserTasks();
-  const [display, setDisplay] = useState(null);
+  const [display, setDisplay] = useState("");
 
   const pinnedTasks = loggedInUserTasks.filter((task) => task.isPinned);
   const otherTasks = loggedInUserTasks.filter((task) => !task.isPinned);
