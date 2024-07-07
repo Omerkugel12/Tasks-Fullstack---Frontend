@@ -14,11 +14,24 @@ import { useModalContext } from "./contexts/ModalContext";
 import Modal from "./components/ui/Modal";
 import CreateTaskPage from "./pages/CreateTaskPage";
 import { Button } from "./components/ui/button";
+import Footer from "./components/react-omponenets/Footer";
 
 function App() {
   const { loggedInUser } = useAuth();
   const { modal, setModal } = useModalContext();
   const { logout } = useAuth();
+
+  const getGreeting = () => {
+    const currentTime = new Date().getHours();
+    if (currentTime >= 5 && currentTime < 12) {
+      return "Good morning";
+    } else if (currentTime >= 12 && currentTime < 18) {
+      return "Good afternoon";
+    } else {
+      return "Good evening";
+    }
+  };
+
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
     if (loggedInUser === null) {
@@ -56,7 +69,9 @@ function App() {
       ) : null}
       <div>
         {loggedInUser && modal === "loggedInModal" ? (
-          <Modal success>Good morning: {loggedInUser.firstName}</Modal>
+          <Modal success>
+            {getGreeting()}, {loggedInUser.firstName}
+          </Modal>
         ) : null}
         {modal === "loginFailure" ? (
           <Modal failure>Error logging in</Modal>
@@ -100,6 +115,7 @@ function App() {
             <Route path="register" element={<RegisterPage />} />
           </Route>
         </Routes>
+        <Footer />
       </div>
     </>
   );

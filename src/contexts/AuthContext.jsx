@@ -3,7 +3,6 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from "./ModalContext";
-import { Toaster } from "@/components/ui/toaster";
 
 const AuthContext = createContext();
 
