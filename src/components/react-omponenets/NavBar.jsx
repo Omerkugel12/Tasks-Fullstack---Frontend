@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useModalContext } from "@/contexts/ModalContext";
 
 function NavBar() {
-  const { loggedInUser, logout } = useAuth();
+  const { loggedInUser } = useAuth();
   const { setModal } = useModalContext();
   return (
     <nav className="bg-primary flex justify-between p-6 px-20 items-center ">
