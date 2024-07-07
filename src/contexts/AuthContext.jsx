@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
         setModal(null);
       }, 5500);
       navigate("/tasks");
+      setModal(null);
     } catch (error) {
       console.error("Error logging in:", error);
       setModal("loginFailure");

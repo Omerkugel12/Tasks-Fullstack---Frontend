@@ -6,12 +6,18 @@ import { Link, useParams } from "react-router-dom";
 import { Pin } from "lucide-react";
 import { useLoggedInUserTasks } from "@/contexts/loggedInUserTasksContext";
 import api from "@/services/api.service";
+import { useModalContext } from "@/contexts/ModalContext";
 
 function TaskItem({ task }) {
-  const { loggedInUserTasks, setLoggedInUserTasks } = useLoggedInUserTasks();
-
+  const { modal } = useModalContext();
   return (
-    <li className="relative flex flex-col border border-ring p-10 w-96 h-72 bg-secondary rounded-lg shadow-2xl space-y-4">
+    <li
+      className={
+        modal === "logout"
+          ? "relative flex flex-col border border-ring p-10 w-96 h-72 bg-slate-700 opacity-70 rounded-lg shadow-2xl space-y-4"
+          : "relative flex flex-col border border-ring p-10 w-96 h-72 bg-secondary rounded-lg shadow-2xl space-y-4"
+      }
+    >
       <h1 className="text-2xl font-bold">{task.title}</h1>
       <p>{task.description}</p>
       <div></div>

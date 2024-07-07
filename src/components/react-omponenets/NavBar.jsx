@@ -3,9 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { useModalContext } from "@/contexts/ModalContext";
 
 function NavBar() {
   const { loggedInUser, logout } = useAuth();
+  const { setModal } = useModalContext();
   return (
     <nav className="bg-primary flex justify-between p-6 px-20 items-center ">
       <h1 className="text-3xl font-bold text-background">
@@ -32,7 +34,7 @@ function NavBar() {
               <Link to="/tasks">Tasks</Link>
             </li>
             <Button
-              onClick={logout}
+              onClick={() => setModal("logout")}
               className="text-xl text-muted font-bold "
               variant="destructive"
             >

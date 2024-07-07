@@ -13,10 +13,12 @@ import NavBar from "./components/react-omponenets/NavBar";
 import { useModalContext } from "./contexts/ModalContext";
 import Modal from "./components/ui/Modal";
 import CreateTaskPage from "./pages/CreateTaskPage";
+import { Button } from "./components/ui/button";
 
 function App() {
   const { loggedInUser } = useAuth();
-  const { modal } = useModalContext();
+  const { modal, setModal } = useModalContext();
+  const { logout } = useAuth();
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
     if (loggedInUser === null) {
@@ -35,6 +37,23 @@ function App() {
   }
   return (
     <>
+      <div
+        className={
+          modal === "logout" &&
+          "fixed top-0 bottom-0 right-0 left-0 bg-slate-700 opacity-70 "
+        }
+      ></div>
+      {modal === "logout" ? (
+        <Modal className="flex flex-col p-10 top-1/2 gap-10">
+          <p className="text-xl">Are yo sure you want to logout?</p>
+          <div className="flex justify-center gap-4">
+            <Button variant="destructive" onClick={logout}>
+              Logout
+            </Button>
+            <Button onClick={() => setModal(null)}>Cancel</Button>
+          </div>
+        </Modal>
+      ) : null}
       <div>
         {loggedInUser && modal === "loggedInModal" ? (
           <Modal success>Good morning: {loggedInUser.firstName}</Modal>
