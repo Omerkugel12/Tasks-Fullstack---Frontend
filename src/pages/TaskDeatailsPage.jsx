@@ -1,9 +1,10 @@
+import TodoList from "@/components/react-omponenets/TodoList";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useModalContext } from "@/contexts/ModalContext";
 import api from "@/services/api.service";
-import { Pencil, Pin, PinOff, Trash2, Vote, X } from "lucide-react";
+import { Pencil, Pin, PinOff, Trash2, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -12,7 +13,7 @@ function TaskDetailsPage() {
   const [task, setTask] = useState(null);
   const { taskId } = useParams();
   const navigate = useNavigate();
-  const { modal, setModal } = useModalContext();
+  const { setModal } = useModalContext();
   const [editTodoInput, setEditTodoInput] = useState(null);
   const [newTodoTitle, setNewTodoTitle] = useState("");
   const [createNewTodoTitle, setCreateNewTodoTitle] = useState("");
@@ -73,7 +74,7 @@ function TaskDetailsPage() {
     }
   }
 
-  async function handlePinnedChange(e, taskId) {
+  async function handlePinnedChange(taskId) {
     try {
       const res = await api.patch(`task/${taskId}`, {
         isPinned: !task.isPinned,
@@ -85,7 +86,7 @@ function TaskDetailsPage() {
     }
   }
 
-  async function handleTodoChecked(e, todoId) {
+  async function handleTodoChecked(todoId) {
     try {
       const updatedTodoList = task.todoList.map((todo) =>
         todo._id === todoId ? { ...todo, isComplete: !todo.isComplete } : todo
@@ -215,87 +216,19 @@ function TaskDetailsPage() {
             )}
             {editTaskInputs ? <Button>Apply</Button> : null}
           </form>
-          <div className="bg-white py-4 rounded-lg flex flex-col px-10 gap-4">
-            {task.todoList.length > 0 ? (
-              <ul className="flex flex-col space-y-4">
-                {task.todoList.map((todo) => {
-                  return (
-                    <li key={todo._id}>
-                      {editTodoInput !== todo._id ? (
-                        <div className="flex justify-between w-100% bg-secondary p-1 rounded-lg px-4">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="checkbox"
-                              checked={todo.isComplete}
-                              onChange={(e) => handleTodoChecked(e, todo._id)}
-                            />
-                            <label
-                              className={
-                                todo.isComplete ? "line-through" : null
-                              }
-                            >
-                              {todo.title}
-                            </label>
-                          </div>
-                          <div className="flex gap-1">
-                            <button
-                              onClick={() =>
-                                handleDeleteTodo(todo._id, task._id)
-                              }
-                              variant="outlet"
-                              className="text-destructive transition-all hover:scale-110"
-                            >
-                              <Trash2 className="text-destructive " />
-                            </button>
-                            <button
-                              variant="outlet"
-                              className="text-primary transition-all  hover:scale-110"
-                              onClick={() => setEditTodoInput(todo._id)}
-                            >
-                              <Pencil className="text-primary" />
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <form
-                          onSubmit={(e) =>
-                            handleUpdateTodo(e, todo._id, task._id)
-                          }
-                          className="flex justify-between w-100% bg-secondary p-1 rounded-lg px-4 "
-                        >
-                          <Input
-                            className="w-[70%]"
-                            value={newTodoTitle}
-                            onChange={(e) => setNewTodoTitle(e.target.value)}
-                            type="text"
-                            placeholder="Enter new todo title..."
-                          />
-                          <button className="text-primary">
-                            <Vote size={20} className="text-primary" />
-                          </button>
-                        </form>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : (
-              <p>No todos yet...</p>
-            )}
-            <form
-              onSubmit={(e) => handleCreateTodo(e, task._id)}
-              className="bg-secondary flex flex-col gap-2 p-3"
-            >
-              <h1 className="text-center font-bold">Add todo</h1>
-              <Input
-                type="text"
-                value={createNewTodoTitle}
-                onChange={(e) => setCreateNewTodoTitle(e.target.value)}
-                placeholder="Enter new todo..."
-              />
-              <Button>Add</Button>
-            </form>
-          </div>
+          <TodoList
+            task={task}
+            editTodoInput={editTodoInput}
+            createNewTodoTitle={createNewTodoTitle}
+            setEditTodoInput={setEditTodoInput}
+            handleTodoChecked={handleTodoChecked}
+            handleDeleteTodo={handleDeleteTodo}
+            handleUpdateTodo={handleUpdateTodo}
+            handleCreateTodo={handleCreateTodo}
+            newTodoTitle={newTodoTitle}
+            setCreateNewTodoTitle={setCreateNewTodoTitle}
+            setNewTodoTitle={setNewTodoTitle}
+          />
         </div>
         <div className="flex gap-4 absolute top-0 right-4">
           <Button
@@ -318,8 +251,8 @@ function TaskDetailsPage() {
               className="hidden"
               type="checkbox"
               checked={task.isPinned}
-              onChange={(e) => {
-                handlePinnedChange(e, task._id);
+              onChange={() => {
+                handlePinnedChange(task._id);
               }}
             />
             {task.isPinned ? (
