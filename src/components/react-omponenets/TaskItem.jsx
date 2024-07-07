@@ -1,11 +1,8 @@
-import { useAuth } from "@/contexts/AuthContext";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "../ui/button";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Pin } from "lucide-react";
-import { useLoggedInUserTasks } from "@/contexts/loggedInUserTasksContext";
-import api from "@/services/api.service";
 import { useModalContext } from "@/contexts/ModalContext";
 
 function TaskItem({ task }) {

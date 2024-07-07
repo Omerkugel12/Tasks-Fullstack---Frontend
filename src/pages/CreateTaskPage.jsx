@@ -8,7 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function CreateTaskPage() {
-  const { loggedInUserTasks, setLoggedInUserTasks } = useLoggedInUserTasks();
+  const { setLoggedInUserTasks } = useLoggedInUserTasks();
 
   async function handleCreateTask(ev) {
     ev.preventDefault();
