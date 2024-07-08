@@ -26,36 +26,38 @@ function IndicationModals() {
         </Modal>
       ) : null}
       {modal === "loginFailure" ? (
-        <Modal failure>Error logging in</Modal>
+        <Modal failure>Error logging in!</Modal>
       ) : null}
       {modal === "successDelete" ? (
         <Modal success>Task deleted successfully!</Modal>
       ) : null}
       {modal === "failureDelete" ? (
-        <Modal failure>Error to delete task</Modal>
+        <Modal failure>Error to delete task!</Modal>
       ) : null}
       {modal === "successEditTask" && (
         <Modal success>Task edited successfully!</Modal>
       )}
-      {modal === "failureEditTask" && <Modal failure>Error to edit task</Modal>}
+      {modal === "failureEditTask" && (
+        <Modal failure>Error to edit task!</Modal>
+      )}
       {modal === "successPinned" && (
         <Modal success>Task pinned successfully!</Modal>
       )}
       {modal === "successUnPinned" && (
         <Modal success>Task unpinned successfully!</Modal>
       )}
-      {modal === "failurePinned" && <Modal failure>Error to pin task</Modal>}
+      {modal === "failurePinned" && <Modal failure>Error to pin task!</Modal>}
       {modal === "failureUnPinned" && (
-        <Modal failure>Error to unpin task</Modal>
+        <Modal failure>Error to unpin task!</Modal>
       )}
       {modal === "successTodoChecked" && (
         <Modal success>Good job, keep going!</Modal>
       )}
       {modal === "successTodoUnchecked" && (
-        <Modal success>Todo unchecked</Modal>
+        <Modal success>Todo unchecked!</Modal>
       )}
       {modal === "failureTodoUnchecked" && (
-        <Modal failure>Error to change status</Modal>
+        <Modal failure>Error to change status!</Modal>
       )}
       {modal === "successTodoDelete" && (
         <Modal success>Todo deleted successfully!</Modal>
@@ -63,15 +65,23 @@ function IndicationModals() {
       {modal === "failureTodoDelete" && (
         <Modal failure>Error to delete todo!</Modal>
       )}
-      {modal === "successEditTodo" && <Modal success>Todo title changed</Modal>}
+      {modal === "successEditTodo" && (
+        <Modal success>Todo title changed!</Modal>
+      )}
       {modal === "failureEditTodo" && (
-        <Modal failure>Error to change todo title</Modal>
+        <Modal failure>Error to change todo title!</Modal>
       )}
       {modal === "successCreateTodo" && (
         <Modal success>Todo created successfully!</Modal>
       )}
       {modal === "failureCreateTodo" && (
         <Modal failure>Error to create todo!</Modal>
+      )}
+      {modal === "successCreateTask" && (
+        <Modal success>Task created successfully!</Modal>
+      )}
+      {modal === "failureCreateTask" && (
+        <Modal success>Error creating task!</Modal>
       )}
     </>
   );
