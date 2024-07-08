@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useModalContext } from "@/contexts/ModalContext";
+import { ModeToggle } from "../ui/mode-toggle";
 
 function NavBar() {
   const { loggedInUser } = useAuth();
@@ -52,6 +53,7 @@ function NavBar() {
           </>
         ) : null}
       </ul>
+      <ModeToggle />
     </nav>
   );
 }
