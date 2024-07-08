@@ -10,11 +10,13 @@ import { Link } from "react-router-dom";
 import TasksTable from "@/components/react-omponenets/TasksTable";
 import TasksCards from "@/components/react-omponenets/TasksCards";
 import { Skeleton } from "@/components/ui/skeleton";
+import TasksTableSkeleton from "@/components/react-omponenets/TableSkeleton";
+import CardsSkeleton from "@/components/react-omponenets/CardsSkeleton";
 
 function TasksPage() {
   const { loggedInUser } = useAuth();
   const { loggedInUserTasks, setLoggedInUserTasks } = useLoggedInUserTasks();
-  const [display, setDisplay] = useState("");
+  const [display, setDisplay] = useState("cards");
   const [loading, setLoading] = useState(false);
 
   const pinnedTasks = loggedInUserTasks.filter((task) => task.isPinned);
@@ -22,125 +24,23 @@ function TasksPage() {
 
   useEffect(() => {
     setLoading(true);
-    console.log("display", display);
     async function fetchLoggedInUserTasks() {
       try {
         const res = await api.get("/task");
         setLoggedInUserTasks(res.data);
         setLoading(false);
-        console.log("display", display);
       } catch (error) {
         console.log(error);
       }
     }
-    // setTimeout(() => {
     fetchLoggedInUserTasks();
-    // }, 5000);
-  }, []);
+  }, [display]);
 
   return (
     <>
-      {loading && "table" ? (
-        <div className="flex flex-wrap gap-4 justify-center">
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
-            </div>
-          </div>
-        </div>
+      {loading && display === "table" && <TasksTableSkeleton />}
+      {loading && display === "cards" ? (
+        <CardsSkeleton />
       ) : (
         <div className="flex flex-col justify-center items-center ">
           <Link
