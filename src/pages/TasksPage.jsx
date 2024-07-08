@@ -38,10 +38,9 @@ function TasksPage() {
 
   return (
     <>
+      {loading && display === "cards" && <CardsSkeleton />}
       {loading && display === "table" && <TasksTableSkeleton />}
-      {loading && display === "cards" ? (
-        <CardsSkeleton />
-      ) : (
+      {!loading && (
         <div className="flex flex-col justify-center items-center ">
           <Link
             to={"/tasks/create"}

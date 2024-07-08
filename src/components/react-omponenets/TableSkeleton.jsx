@@ -9,10 +9,10 @@ function TasksTableSkeleton() {
     <table className="w-full border-collapse border border-gray-200">
       <thead>
         <tr className="bg-gray-100">
-          <th className="p-4 text-left">Task</th>
-          <th className="p-4 text-left">Description</th>
-          <th className="p-4 text-left">Pinned</th>
-          <th className="p-4 text-left">Details</th>
+          <th className="p-4 text-left"></th>
+          <th className="p-4 text-left"></th>
+          <th className="p-4 text-left"></th>
+          <th className="p-4 text-left"></th>
         </tr>
       </thead>
       <tbody>
