@@ -9,4 +9,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: "../Tasks-backend/public",
+    emptyOutDir: true,
+  },
 });

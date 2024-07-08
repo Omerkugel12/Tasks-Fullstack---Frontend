@@ -49,7 +49,9 @@ function App() {
       ></div>
       {modal === "logout" ? (
         <Modal className="flex flex-col p-10 top-1/2 gap-10">
-          <p className="text-xl">Are yo sure you want to logout?</p>
+          <p className="text-xl text-secondary">
+            Are yo sure you want to logout?
+          </p>
           <div className="flex justify-center gap-4">
             <Button variant="destructive" onClick={logout}>
               Logout

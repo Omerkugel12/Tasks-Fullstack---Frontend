@@ -18,7 +18,7 @@ function TodoList({
   setNewTodoTitle,
 }) {
   return (
-    <div className="bg-white py-4 rounded-lg flex flex-col px-10 gap-4">
+    <div className="bg-secondary py-4 rounded-lg flex flex-col px-10 gap-4">
       {task.todoList.length > 0 ? (
         <ul className="flex flex-col space-y-4">
           {task.todoList.map((todo) => {
