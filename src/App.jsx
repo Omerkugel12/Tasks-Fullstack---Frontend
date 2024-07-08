@@ -15,22 +15,12 @@ import Modal from "./components/ui/Modal";
 import CreateTaskPage from "./pages/CreateTaskPage";
 import { Button } from "./components/ui/button";
 import Footer from "./components/react-omponenets/Footer";
+import IndicationModals from "./components/react-omponenets/IndicationModals";
 
 function App() {
   const { loggedInUser } = useAuth();
   const { modal, setModal } = useModalContext();
   const { logout } = useAuth();
-
-  const getGreeting = () => {
-    const currentTime = new Date().getHours();
-    if (currentTime >= 5 && currentTime < 12) {
-      return "Good morning";
-    } else if (currentTime >= 12 && currentTime < 18) {
-      return "Good afternoon";
-    } else {
-      return "Good evening";
-    }
-  };
 
   function ProtectedLoggedInRoute({ children }) {
     // in real world, loggedInUser will consume from AuthContext
@@ -52,8 +42,9 @@ function App() {
     <>
       <div
         className={
-          modal === "logout" &&
-          "fixed top-0 bottom-0 right-0 left-0 bg-slate-700 opacity-70 "
+          modal === "logout"
+            ? "fixed top-0 bottom-0 right-0 left-0 bg-slate-700 opacity-70 "
+            : ""
         }
       ></div>
       {modal === "logout" ? (
@@ -68,20 +59,7 @@ function App() {
         </Modal>
       ) : null}
       <div>
-        {loggedInUser && modal === "loggedInModal" ? (
-          <Modal success>
-            {getGreeting()}, {loggedInUser.firstName}
-          </Modal>
-        ) : null}
-        {modal === "loginFailure" ? (
-          <Modal failure>Error logging in</Modal>
-        ) : null}
-        {modal === "successDelete" ? (
-          <Modal success>Task deleted successfully!</Modal>
-        ) : null}
-        {modal === "failureDelete" ? (
-          <Modal failure>Error to delete task</Modal>
-        ) : null}
+        <IndicationModals />
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />

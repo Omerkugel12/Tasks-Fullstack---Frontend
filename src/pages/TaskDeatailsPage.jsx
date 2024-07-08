@@ -30,7 +30,7 @@ function TaskDetailsPage() {
       }
     }
     fetchTask();
-  }, [taskId]);
+  }, []);
 
   if (!task) {
     return null;
@@ -43,7 +43,6 @@ function TaskDetailsPage() {
     const newDescription = formData.get("description");
     const newBody = formData.get("body");
     const data = { newTitle, newDescription, newBody };
-    console.log(data);
 
     try {
       const { data: updatedTask } = await api.patch(`task/${taskId}`, {
@@ -53,8 +52,20 @@ function TaskDetailsPage() {
       });
       setTask(updatedTask);
       setEditTaskInputs(false);
+      {
+        newTitle || newDescription || newBody
+          ? setModal("successEditTask")
+          : null;
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      setModal("failureEditTask");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 
@@ -65,13 +76,13 @@ function TaskDetailsPage() {
       setModal("successDelete");
       setTimeout(() => {
         setModal(null);
-      }, 5000);
+      }, 4000);
     } catch (error) {
       console.log(error);
       setModal("failureDelete");
       setTimeout(() => {
         setModal(null);
-      }, 5000);
+      }, 4000);
     }
   }
 
@@ -82,8 +93,20 @@ function TaskDetailsPage() {
       });
       const updatedTask = res.data;
       setTask((prevTask) => ({ ...prevTask, isPinned: updatedTask.isPinned }));
+      {
+        task.isPinned ? setModal("successUnPinned") : setModal("successPinned");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      {
+        task.isPinned ? setModal("failureUnPinned") : setModal("failurePinned");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 
@@ -99,8 +122,22 @@ function TaskDetailsPage() {
 
       const updatedTask = res.data;
       setTask(updatedTask);
+
+      const todo = task.todoList.find((todo) => todo._id === todoId);
+      {
+        todo.isComplete
+          ? setModal("successTodoUnchecked")
+          : setModal("successTodoChecked");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      setModal("failureTodoUnchecked");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 
@@ -114,8 +151,16 @@ function TaskDetailsPage() {
       });
       const updatedTask = res.data;
       setTask(updatedTask);
+      setModal("successTodoDelete");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      setModal("failureTodoDelete");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 
@@ -141,8 +186,20 @@ function TaskDetailsPage() {
       setTask(updatedTask);
       setEditTodoInput(null);
       setNewTodoTitle("");
+      {
+        newTodoTitle !== "" && setModal("successEditTodo");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      {
+        newTodoTitle !== "" && setModal("failureEditTodo");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 
@@ -157,11 +214,22 @@ function TaskDetailsPage() {
       });
 
       const updatedTask = res.data;
-
       setTask(updatedTask);
       setCreateNewTodoTitle("");
+      {
+        createNewTodoTitle !== "" && setModal("successCreateTodo");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      {
+        createNewTodoTitle !== "" && setModal("failureCreateTodo");
+      }
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
   }
 

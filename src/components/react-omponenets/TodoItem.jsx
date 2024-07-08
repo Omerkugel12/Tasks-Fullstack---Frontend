@@ -1,5 +1,5 @@
 import React from "react";
-import { Pencil, Trash2, Vote } from "lucide-react";
+import { Pencil, Trash2, Vote, X } from "lucide-react";
 import { Input } from "../ui/input";
 
 function TodoItem({
@@ -49,7 +49,7 @@ function TodoItem({
       ) : (
         <form
           onSubmit={(e) => handleUpdateTodo(e, todo._id, task._id)}
-          className="flex justify-between w-100% bg-secondary p-1 rounded-lg px-4 "
+          className="flex items-center justify-between w-100% bg-secondary p-1 rounded-lg px-4 "
         >
           <Input
             className="w-[70%]"
@@ -58,9 +58,14 @@ function TodoItem({
             type="text"
             placeholder="Enter new todo title..."
           />
-          <button className="text-primary">
-            <Vote size={20} className="text-primary" />
-          </button>
+          <div className="flex gap-2">
+            <button type="submit" className="text-primary">
+              <Vote size={20} className="text-primary" />
+            </button>
+            <button onClick={() => setEditTodoInput(null)}>
+              <X color="#ff0000" className="size-5" />
+            </button>
+          </div>
         </form>
       )}
     </li>
