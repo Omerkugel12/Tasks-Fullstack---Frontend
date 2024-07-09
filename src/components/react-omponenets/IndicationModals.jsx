@@ -87,7 +87,13 @@ function IndicationModals() {
         <Modal success>Task moved to archive!</Modal>
       )}
       {modal === "failureCreateArchive" && (
-        <Modal success>Error to delete task!</Modal>
+        <Modal failure>Error to delete task!</Modal>
+      )}
+      {modal === "successReturn" && (
+        <Modal success>Task returned to your tasks!</Modal>
+      )}
+      {modal === "failureReturn" && (
+        <Modal failure>Error returnning tasks to your tasks!</Modal>
       )}
     </>
   );

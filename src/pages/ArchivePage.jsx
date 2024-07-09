@@ -1,22 +1,25 @@
+import ArchivesList from "@/components/react-omponenets/ArchivesList";
+import CardsSkeleton from "@/components/react-omponenets/CardsSkeleton";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useModalContext } from "@/contexts/ModalContext";
 import api from "@/services/api.service";
-import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 function ArchivePage() {
   const { loggedInUser } = useAuth();
   const [archives, setArchives] = useState([]);
   const [loading, setloading] = useState(false);
-  const { modal } = useModalContext();
+  const { modal, setModal } = useModalContext();
   const [deleteModal, setDeleteModal] = useState(false);
 
   useEffect(() => {
+    setloading(true);
     async function getArchives() {
       try {
         const { data: fetchedArchives } = await api.get("/archive");
         setArchives(fetchedArchives);
+        setloading(false);
       } catch (error) {
         console.log(error);
       }
@@ -45,8 +48,16 @@ function ArchivePage() {
   async function handleReturnToTasks(archive, archiveId) {
     try {
       await api.post("/task", archive);
+      setModal("successReturn");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     } catch (error) {
       console.log(error);
+      setModal("failureReturn");
+      setTimeout(() => {
+        setModal(null);
+      }, 4000);
     }
 
     try {
@@ -76,44 +87,23 @@ function ArchivePage() {
           </div>
         </>
       ) : null}
-      <div>
-        <h1 className="text-5xl text-center font-extrabold my-8">
-          {loggedInUser && loggedInUser.firstName}'s Archive
-        </h1>
-        <ul className="flex  flex-wrap gap-4">
-          {archives.map((archive) => (
-            <li
-              key={archive._id}
-              className={
-                modal === "logout" || deleteModal
-                  ? "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40  bg-slate-700 opacity-70 rounded-lg shadow-2xl space-y-4"
-                  : "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40 overflow-x-visible bg-secondary rounded-lg shadow-2xl space-y-4"
-              }
-            >
-              <div>
-                <h1 className="text-2xl font-bold">{archive.title}</h1>
-                <p>{archive.description}</p>
-              </div>
-              <div className="flex justify-evenly">
-                <Button
-                  onClick={() => setDeleteModal(archive._id)}
-                  variant="outline"
-                  className="text-destructive border border-destructive hover:bg-destructive/90 "
-                >
-                  <Trash2 className="text-destructive hover:text-secondary" />
-                </Button>
-                <Button
-                  onClick={() => handleReturnToTasks(archive, archive._id)}
-                  variant="outline"
-                  className="text-primary border border-primary hover:bg-primary/90 "
-                >
-                  return to tasks
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {loading ? (
+        <CardsSkeleton />
+      ) : (
+        <div>
+          <h1 className="text-5xl text-center font-extrabold my-8">
+            {loggedInUser && loggedInUser.firstName}'s Archive
+          </h1>
+          <ArchivesList
+            archives={archives}
+            modal={modal}
+            setModal={setModal}
+            deleteModal={deleteModal}
+            setDeleteModal={setDeleteModal}
+            handleReturnToTasks={handleReturnToTasks}
+          />
+        </div>
+      )}
     </>
   );
 }
