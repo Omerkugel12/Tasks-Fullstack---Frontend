@@ -16,7 +16,7 @@ function TodoItem({
   return (
     <li>
       {editTodoInput !== todo._id ? (
-        <div className="flex justify-between w-100% bg-secondary p-1 rounded-lg px-4">
+        <div className="flex justify-between w-100% bg-secondary p-1 rounded-lg px-4 border-b-2 border-primary">
           <div className="flex items-center gap-2">
             <input
               type="checkbox"

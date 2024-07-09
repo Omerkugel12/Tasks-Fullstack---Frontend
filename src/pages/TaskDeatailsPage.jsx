@@ -237,7 +237,7 @@ function TaskDetailsPage() {
     <>
       <div className="fixed top-0 bottom-0 right-0 left-0 bg-slate-700 opacity-80"></div>
       {deleteModal ? (
-        <div className="fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-5 border border-ring p-10 bg-secondary rounded-2xl">
+        <div className=" fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-5 border border-ring p-10 bg-secondary rounded-2xl ">
           <p className="text-xl">Are yo sure you want to delete this task?</p>
           <div className="flex justify-center gap-4">
             <Button variant="destructive" onClick={handleDelete}>
@@ -250,8 +250,8 @@ function TaskDetailsPage() {
       <div
         className={
           deleteModal
-            ? "fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-10 flex flex-col border border-ring p-10 max-w-lg min-w-[32rem] bg-secondary rounded-lg shadow-2xl space-y-4 max-h-[70%] overflow-y-scroll brightness-50"
-            : "fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-10 flex flex-col border border-ring p-10 max-w-lg min-w-[32rem] bg-secondary rounded-lg shadow-2xl space-y-4 max-h-[70%] overflow-y-scroll"
+            ? " fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-10 flex flex-col border border-ring p-10 sm:w-[512px] min-w-64 bg-secondary rounded-lg shadow-2xl space-y-4 max-h-[70%] overflow-y-scroll brightness-50"
+            : "fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-10 flex flex-col border border-ring p-10 sm:w-[512px] min-w-64 bg-secondary rounded-lg shadow-2xl space-y-4 max-h-[70%] overflow-y-scroll"
         }
       >
         <Link className="fixed top-2 left-2" to={"/tasks"}>
