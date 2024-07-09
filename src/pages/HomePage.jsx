@@ -7,7 +7,7 @@ function HomePage() {
   const { loggedInUser } = useAuth();
 
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-blue-600 min-h-screen flex flex-col">
+    <div className="bg-gradient-to-br from-primary to-background min-h-screen flex flex-col">
       {/* Hero Section */}
       <section className="flex-1 flex flex-col justify-center items-center text-center py-16 px-4">
         <h1 className="text-5xl font-bold text-white mb-6">
@@ -111,7 +111,7 @@ function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-blue-500 py-16 text-center">
+      <section className="bg-gradient-to-br from-primary to-secondary py-16 text-center">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-white mb-6">
             Start Organizing Today

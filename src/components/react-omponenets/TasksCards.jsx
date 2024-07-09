@@ -11,7 +11,7 @@ function TasksCards() {
     <div className="flex flex-col gap-6 ">
       {pinnedTasks.length > 0 && (
         <>
-          <div className="shadow-2xl p-8">
+          <div className=" shadow-2xl p-8">
             <h2 className="text-center text-3xl font-bold mb-4">
               Pinned Tasks
             </h2>

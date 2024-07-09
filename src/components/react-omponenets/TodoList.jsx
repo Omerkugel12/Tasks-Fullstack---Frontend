@@ -52,7 +52,9 @@ function TodoList({
           onChange={(e) => setCreateNewTodoTitle(e.target.value)}
           placeholder="Enter new todo..."
         />
-        <Button>Add</Button>
+        <Button className={createNewTodoTitle ? "" : "read-only:opacity-50"}>
+          Add
+        </Button>
       </form>
     </div>
   );

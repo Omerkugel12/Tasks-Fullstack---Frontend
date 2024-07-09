@@ -2,10 +2,10 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-secondary">
       <main className="flex-grow container mx-auto py-10 px-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 text-gray-800">
+          <h1 className="text-3xl md:text-5xl font-bold text-center mb-8 ">
             About Us
           </h1>
 
@@ -19,7 +19,7 @@ const AboutPage = () => {
             </div>
 
             <div className="flex-1">
-              <p className="text-lg leading-relaxed text-gray-700">
+              <p className="text-lg leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                 gravida nisl at ligula posuere, at laoreet est fringilla. Sed
                 scelerisque rutrum orci, nec suscipit orci fringilla vel. Fusce
@@ -33,10 +33,8 @@ const AboutPage = () => {
           </div>
 
           <div className="mt-10 text-center">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Our Mission
-            </h2>
-            <p className="text-lg text-gray-700">
+            <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
+            <p className="text-lg ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               gravida nisl at ligula posuere, at laoreet est fringilla. Sed
               scelerisque rutrum orci, nec suscipit orci fringilla vel. Fusce
@@ -45,10 +43,8 @@ const AboutPage = () => {
           </div>
 
           <div className="mt-10 text-center">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Our Vision
-            </h2>
-            <p className="text-lg text-gray-700">
+            <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
+            <p className="text-lg ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               gravida nisl at ligula posuere, at laoreet est fringilla. Sed
               scelerisque rutrum orci, nec suscipit orci fringilla vel. Fusce
