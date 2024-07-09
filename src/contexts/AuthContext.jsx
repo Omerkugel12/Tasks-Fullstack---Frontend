@@ -75,7 +75,6 @@ export const AuthProvider = ({ children }) => {
         description: "User logged-in",
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }

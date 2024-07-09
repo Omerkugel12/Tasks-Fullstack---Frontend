@@ -74,7 +74,6 @@ function TaskDetailsPage() {
         description: `${task.title} updated`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -101,7 +100,6 @@ function TaskDetailsPage() {
         description: `${task.title} deleted`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +138,6 @@ function TaskDetailsPage() {
             description: `${task.title} - pinned`,
           };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -187,7 +184,6 @@ function TaskDetailsPage() {
           };
 
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -221,7 +217,6 @@ function TaskDetailsPage() {
         description: `Task: ${task.title} - ${todo.title} deleted`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -271,7 +266,6 @@ function TaskDetailsPage() {
         description: `Task: ${task.title} - ${todo.title}'s title changed`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
@@ -311,7 +305,6 @@ function TaskDetailsPage() {
         description: `Task: ${task.title} - ${newTodo.title} created`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }

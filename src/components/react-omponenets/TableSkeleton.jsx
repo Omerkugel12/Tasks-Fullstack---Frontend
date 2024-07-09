@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 function TasksTableSkeleton() {
   // Number of skeleton rows to render
-  const skeletonRows = 5; // Adjust as needed
+  const skeletonRows = 20; // Adjust as needed
 
   return (
     <table className="w-full border-collapse border border-gray-200">

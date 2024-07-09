@@ -45,7 +45,6 @@ function CreateTaskPage() {
         description: `${data.title} created`,
       };
       await api.post("/activity", newActivity);
-      console.log(newActivity);
     } catch (error) {
       console.log(error);
     }
