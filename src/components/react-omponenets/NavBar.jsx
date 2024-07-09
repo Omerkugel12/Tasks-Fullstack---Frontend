@@ -71,6 +71,9 @@ function NavBar() {
               <li className="text-xl text-muted font-bold">
                 <Link to="/tasks">Tasks</Link>
               </li>
+              <li className="text-xl text-muted font-bold">
+                <Link to="/tasks/activity">Activity</Link>
+              </li>
               <Button
                 onClick={() => setModal("logout")}
                 className="text-xl text-muted font-bold text-white"

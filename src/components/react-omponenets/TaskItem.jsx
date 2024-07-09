@@ -11,13 +11,14 @@ function TaskItem({ task }) {
     <li
       className={
         modal === "logout"
-          ? "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40 overflow-y-scroll bg-slate-700 opacity-70 rounded-lg shadow-2xl space-y-4"
-          : "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40 overflow-y-scroll bg-secondary rounded-lg shadow-2xl space-y-4"
+          ? "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40  bg-slate-700 opacity-70 rounded-lg shadow-2xl space-y-4"
+          : "relative flex flex-col border border-ring p-2 min-w-[300px] w-80 h-40 overflow-x-visible bg-secondary rounded-lg shadow-2xl space-y-4"
       }
     >
-      <h1 className="text-2xl font-bold">{task.title}</h1>
-      <p>{task.description}</p>
-      <div></div>
+      <div>
+        <h1 className="text-2xl font-bold">{task.title}</h1>
+        <p>{task.description}</p>
+      </div>
       {task.isPinned ? (
         <Badge className="absolute bottom-4 right-5 bg-background text-primary flex gap-2">
           Pinned <Pin color="#0008ff" className="size-4" />

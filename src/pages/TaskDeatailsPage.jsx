@@ -67,6 +67,17 @@ function TaskDetailsPage() {
         setModal(null);
       }, 4000);
     }
+
+    try {
+      const newActivity = {
+        operation: "PATCH",
+        description: `${task.title} updated`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleDelete() {
@@ -83,6 +94,16 @@ function TaskDetailsPage() {
       setTimeout(() => {
         setModal(null);
       }, 4000);
+    }
+    try {
+      const newActivity = {
+        operation: "DELETE",
+        description: `${task.title} deleted`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -108,9 +129,25 @@ function TaskDetailsPage() {
         setModal(null);
       }, 4000);
     }
+    try {
+      const newActivity = task.isPinned
+        ? {
+            operation: "Pin removed",
+            description: `${task.title} pinned removed`,
+          }
+        : {
+            operation: "Pin",
+            description: `${task.title} - pinned`,
+          };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleTodoChecked(todoId) {
+    const todo = task.todoList.find((todo) => todo._id === todoId);
     try {
       const updatedTodoList = task.todoList.map((todo) =>
         todo._id === todoId ? { ...todo, isComplete: !todo.isComplete } : todo
@@ -123,7 +160,6 @@ function TaskDetailsPage() {
       const updatedTask = res.data;
       setTask(updatedTask);
 
-      const todo = task.todoList.find((todo) => todo._id === todoId);
       {
         todo.isComplete
           ? setModal("successTodoUnchecked")
@@ -139,9 +175,26 @@ function TaskDetailsPage() {
         setModal(null);
       }, 4000);
     }
+    try {
+      const newActivity = todo.isComplete
+        ? {
+            operation: "UNCHECKED",
+            description: `Task: ${task.title} - ${todo.title} unchecked`,
+          }
+        : {
+            operation: "CHECKED",
+            description: `Task: ${task.title} - ${todo.title} checked`,
+          };
+
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleDeleteTodo(todoId, taskId) {
+    const todo = task.todoList.find((todo) => todo._id === todoId);
     try {
       const updatedTodoList = task.todoList.filter(
         (todo) => todo._id !== todoId
@@ -162,9 +215,20 @@ function TaskDetailsPage() {
         setModal(null);
       }, 4000);
     }
+    try {
+      const newActivity = {
+        operation: "DELETE",
+        description: `Task: ${task.title} - ${todo.title} deleted`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleUpdateTodo(e, todoId, taskId) {
+    const todo = task.todoList.find((todo) => todo._id === todoId);
     e.preventDefault();
 
     try {
@@ -201,12 +265,22 @@ function TaskDetailsPage() {
         setModal(null);
       }, 4000);
     }
+    try {
+      const newActivity = {
+        operation: "EDIT",
+        description: `Task: ${task.title} - ${todo.title}'s title changed`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleCreateTodo(e, taskId) {
     e.preventDefault();
+    const newTodo = { title: createNewTodoTitle, isComplete: false };
     try {
-      const newTodo = { title: createNewTodoTitle, isComplete: false };
       const updatedTodoList = [...task.todoList, newTodo];
 
       const res = await api.patch(`task/${taskId}`, {
@@ -230,6 +304,16 @@ function TaskDetailsPage() {
       setTimeout(() => {
         setModal(null);
       }, 4000);
+    }
+    try {
+      const newActivity = {
+        operation: "CREATE",
+        description: `Task: ${task.title} - ${newTodo.title} created`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
     }
   }
 

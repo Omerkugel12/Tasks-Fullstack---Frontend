@@ -39,6 +39,16 @@ function CreateTaskPage() {
       console.log(error);
       setModal("failureCreateTask");
     }
+    try {
+      const newActivity = {
+        operation: "CREATE",
+        description: `${data.title} created`,
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

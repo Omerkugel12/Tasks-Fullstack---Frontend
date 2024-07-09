@@ -7,7 +7,6 @@ import TasksPage from "./pages/TasksPage";
 import TaskDeatailsPage from "./pages/TaskDeatailsPage";
 import TasksLayout from "./layouts-pages/TasksLayout";
 import { useAuth } from "./contexts/AuthContext";
-import { Link } from "react-router-dom";
 import AboutPage from "./pages/AboutPage";
 import NavBar from "./components/react-omponenets/NavBar";
 import { useModalContext } from "./contexts/ModalContext";
@@ -16,6 +15,7 @@ import CreateTaskPage from "./pages/CreateTaskPage";
 import { Button } from "./components/ui/button";
 import Footer from "./components/react-omponenets/Footer";
 import IndicationModals from "./components/react-omponenets/IndicationModals";
+import ActivityPage from "./pages/ActivityPage";
 
 function App() {
   const { loggedInUser } = useAuth();
@@ -66,6 +66,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+
           <Route
             path="/tasks"
             element={
@@ -75,6 +76,7 @@ function App() {
             }
           >
             <Route index element={<TasksPage />} />
+            <Route path="activity" element={<ActivityPage />} />
             <Route path=":taskId" element={<TasksPage />}>
               <Route index element={<TaskDeatailsPage />} />
             </Route>

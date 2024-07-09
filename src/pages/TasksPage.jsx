@@ -6,10 +6,8 @@ import { Grid3X3, LayoutGrid } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
-
 import TasksTable from "@/components/react-omponenets/TasksTable";
 import TasksCards from "@/components/react-omponenets/TasksCards";
-import { Skeleton } from "@/components/ui/skeleton";
 import TasksTableSkeleton from "@/components/react-omponenets/TableSkeleton";
 import CardsSkeleton from "@/components/react-omponenets/CardsSkeleton";
 

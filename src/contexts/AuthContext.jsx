@@ -68,6 +68,17 @@ export const AuthProvider = ({ children }) => {
         setModal(null);
       }, 5500);
     }
+
+    try {
+      const newActivity = {
+        operation: "Login",
+        description: "User logged-in",
+      };
+      await api.post("/activity", newActivity);
+      console.log(newActivity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function register(userData) {
