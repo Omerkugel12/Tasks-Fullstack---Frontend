@@ -33,15 +33,15 @@ function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="bg-white py-16">
+      <section className="bg-secondary py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+          <h2 className="text-3xl font-bold  mb-8 text-center">
             Why Choose Tasks App?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center space-y-4">
               <svg
-                className="text-blue-500 w-16 h-16"
+                className="text-primary w-16 h-16"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -51,16 +51,14 @@ function HomePage() {
                   clipRule="evenodd"
                 />
               </svg>
-              <h3 className="text-xl font-bold text-gray-800">
-                Organize Tasks
-              </h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold">Organize Tasks</h3>
+              <p className="">
                 Effortlessly manage your tasks and to-dos in one place.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-4">
               <svg
-                className="text-blue-500 w-16 h-16"
+                className="text-primary w-16 h-16"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -70,16 +68,14 @@ function HomePage() {
                   clipRule="evenodd"
                 />
               </svg>
-              <h3 className="text-xl font-bold text-gray-800">
-                Collaborate Effectively
-              </h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold ">Collaborate Effectively</h3>
+              <p className="">
                 Share tasks and collaborate with team members effortlessly.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-4">
               <svg
-                className="text-blue-500 w-16 h-16"
+                className="text-primary w-16 h-16"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -99,10 +95,8 @@ function HomePage() {
                   clipRule="evenodd"
                 />
               </svg>
-              <h3 className="text-xl font-bold text-gray-800">
-                Stay Organized
-              </h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold ">Stay Organized</h3>
+              <p className="">
                 Stay on track with reminders and due dates for tasks.
               </p>
             </div>
