@@ -16,6 +16,7 @@ import { Button } from "./components/ui/button";
 import Footer from "./components/react-omponenets/Footer";
 import IndicationModals from "./components/react-omponenets/IndicationModals";
 import ActivityPage from "./pages/ActivityPage";
+import ArchivePage from "./pages/ArchivePage";
 
 function App() {
   const { loggedInUser } = useAuth();
@@ -49,9 +50,7 @@ function App() {
       ></div>
       {modal === "logout" ? (
         <Modal className="flex flex-col p-10 top-1/2 gap-10">
-          <p className="text-xl text-secondary">
-            Are yo sure you want to logout?
-          </p>
+          <p className="text-xl">Are yo sure you want to logout?</p>
           <div className="flex justify-center gap-4">
             <Button variant="destructive" onClick={logout}>
               Logout
@@ -77,6 +76,7 @@ function App() {
           >
             <Route index element={<TasksPage />} />
             <Route path="activity" element={<ActivityPage />} />
+            <Route path="archive" element={<ArchivePage />} />
             <Route path=":taskId" element={<TasksPage />}>
               <Route index element={<TaskDeatailsPage />} />
             </Route>

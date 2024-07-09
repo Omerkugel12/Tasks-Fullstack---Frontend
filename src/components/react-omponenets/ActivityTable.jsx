@@ -12,7 +12,7 @@ import {
 function ActivityTable({ activities }) {
   return (
     <Table>
-      <TableCaption>A list of your Tasks.</TableCaption>
+      <TableCaption>A list of your Activity.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="text-primary text-xl font-bold">

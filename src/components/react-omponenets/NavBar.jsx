@@ -72,6 +72,9 @@ function NavBar() {
                 <Link to="/tasks">Tasks</Link>
               </li>
               <li className="text-xl text-muted font-bold">
+                <Link to="/tasks/archive">Archive</Link>
+              </li>
+              <li className="text-xl text-muted font-bold">
                 <Link to="/tasks/activity">Activity</Link>
               </li>
               <Button
