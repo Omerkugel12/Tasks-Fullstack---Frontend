@@ -16,7 +16,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="bg-primary flex justify-between p-6 px-4 sm:px-6 md:px-10 lg:px-20 items-center">
+    <nav className="bg-primary flex justify-between p-2 px-4 sm:px-6 md:px-10 lg:px-20 items-center">
       <h1 className="text-3xl font-bold text-background">
         <Link to="/">Tasking</Link>
       </h1>

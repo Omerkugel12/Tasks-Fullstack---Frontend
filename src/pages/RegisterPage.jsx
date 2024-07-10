@@ -30,12 +30,12 @@ function RegisterPage() {
 
   return (
     <>
-      <Card className="w-96">
+      <Card className="w-96 max-h-96 overflow-scroll">
         <CardHeader>
           <CardTitle>Register</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleRegisterSubmit} className="space-y-4">
+          <form onSubmit={handleRegisterSubmit}>
             <div>
               <Label>First name:</Label>
               <Input
@@ -83,7 +83,10 @@ function RegisterPage() {
         </CardContent>
         <CardFooter>
           <p>
-            Already have an account? <Link to={"/auth/login"}>Login</Link>
+            Already have an account?{" "}
+            <Link to={"/auth/login"} className="text-primary underline">
+              Login
+            </Link>
           </p>
         </CardFooter>
       </Card>
