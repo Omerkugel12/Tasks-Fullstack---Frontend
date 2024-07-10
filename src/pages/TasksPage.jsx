@@ -42,21 +42,21 @@ function TasksPage() {
         <div className="flex flex-col justify-center items-center ">
           <Link
             to={"/tasks/create"}
-            className="sm:absolute sm:top-28 sm:right-6  bg-primary p-4 rounded-xl text-secondary shadow-2xl hover:"
+            className="sm:absolute sm:top-28 sm:right-24  bg-primary p-4 rounded-xl text-secondary shadow-2xl hover:"
           >
             Create new task
           </Link>
           {display === "cards" ? (
             <Button
               onClick={() => setDisplay("table")}
-              className=" absolute sm:top-28 sm:left-6"
+              className=" absolute sm:top-28 sm:left-24"
             >
               <Grid3X3 size={32} color="#ffffff" />
             </Button>
           ) : (
             <Button
               onClick={() => setDisplay("cards")}
-              className=" absolute sm:top-28 sm:left-6"
+              className=" absolute sm:top-28 sm:left-24"
             >
               <LayoutGrid size={32} color="#ffffff" />
             </Button>
