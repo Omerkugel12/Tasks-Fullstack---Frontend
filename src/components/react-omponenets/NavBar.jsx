@@ -1,10 +1,11 @@
 import { useAuth } from "@/contexts/AuthContext";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useModalContext } from "@/contexts/ModalContext";
 import { ModeToggle } from "../ui/mode-toggle";
+import { Underline } from "lucide-react";
 
 function NavBar() {
   const { loggedInUser } = useAuth();
@@ -15,6 +16,22 @@ function NavBar() {
     setIsOpen(!isOpen);
   };
 
+  function TopNavLink(props) {
+    const { href, children } = props;
+    return (
+      <NavLink
+        style={({ isActive }) => {
+          return isActive
+            ? { fontSize: "1.5em", textDecoration: "underline" }
+            : {};
+        }}
+        to={href}
+        className="text-xl font-bold"
+      >
+        {children}
+      </NavLink>
+    );
+  }
   return (
     <nav className="bg-primary flex justify-between p-2 px-4 sm:px-6 md:px-10 lg:px-20 items-center">
       <h1 className="text-3xl font-bold text-background">
@@ -54,28 +71,26 @@ function NavBar() {
             isOpen ? "block" : "hidden"
           } sm:flex sm:gap-6 items-center mt-4 sm:mt-0`}
         >
-          <li className="text-xl text-muted font-bold">
-            <Link to="/about">About</Link>
-          </li>
+          <TopNavLink href="/about">About</TopNavLink>
           {!loggedInUser ? (
             <>
-              <li className="text-xl text-muted font-bold">
-                <Link to="/auth/login">Login</Link>
+              <li>
+                <TopNavLink href="/auth/login">Login</TopNavLink>
               </li>
-              <li className="text-xl text-muted font-bold">
-                <Link to="/auth/register">Register</Link>
+              <li>
+                <TopNavLink href="/auth/register">Register</TopNavLink>
               </li>
             </>
           ) : (
             <>
-              <li className="text-xl text-muted font-bold">
-                <Link to="/tasks">Tasks</Link>
+              <li>
+                <TopNavLink href="/tasks">Tasks</TopNavLink>
               </li>
-              <li className="text-xl text-muted font-bold">
-                <Link to="/tasks/archive">Archive</Link>
+              <li>
+                <TopNavLink href="/tasks/archive">Archive</TopNavLink>
               </li>
-              <li className="text-xl text-muted font-bold">
-                <Link to="/tasks/activity">Activity</Link>
+              <li>
+                <TopNavLink href="/tasks/activity">Activity</TopNavLink>
               </li>
               <Button
                 onClick={() => setModal("logout")}
