@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useModalContext } from "@/contexts/ModalContext";
 import { ModeToggle } from "../ui/mode-toggle";
-import { Underline } from "lucide-react";
+import { Archive, BookOpenText, ListChecks, Underline } from "lucide-react";
 
 function NavBar() {
   const { loggedInUser } = useAuth();
@@ -26,7 +26,7 @@ function NavBar() {
             : {};
         }}
         to={href}
-        className="text-xl font-bold"
+        className="text-xl font-bold flex items-end justify-center gap-1"
       >
         {children}
       </NavLink>
@@ -34,8 +34,8 @@ function NavBar() {
   }
   return (
     <nav className="bg-primary flex justify-between p-2 px-4 sm:px-6 md:px-10 lg:px-20 items-center">
-      <h1 className="text-3xl font-bold text-background">
-        <Link to="/">Tasking</Link>
+      <h1 className="text-3xl font-bold text-background flex flex-row-reverse gap-2 items-center">
+        <Link to="/">Tasking</Link> <ListChecks className="size-8" />
       </h1>
       <div className="flex items-center">
         {/* Hamburger menu for mobile */}
@@ -71,7 +71,9 @@ function NavBar() {
             isOpen ? "block" : "hidden"
           } sm:flex sm:gap-6 items-center mt-4 sm:mt-0`}
         >
-          <TopNavLink href="/about">About</TopNavLink>
+          <TopNavLink href="/about">
+            <BookOpenText className="size-6" /> About
+          </TopNavLink>
           {!loggedInUser ? (
             <>
               <li>
@@ -87,7 +89,9 @@ function NavBar() {
                 <TopNavLink href="/tasks">Tasks</TopNavLink>
               </li>
               <li>
-                <TopNavLink href="/tasks/archive">Archive</TopNavLink>
+                <TopNavLink href="/tasks/archive">
+                  <Archive className="size-6" /> Archive
+                </TopNavLink>
               </li>
               <li>
                 <TopNavLink href="/tasks/activity">Activity</TopNavLink>
